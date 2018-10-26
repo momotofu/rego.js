@@ -1,1 +1,1 @@
-# I tiny VC framework
+# A tiny VC framework
