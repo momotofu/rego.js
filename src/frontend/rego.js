@@ -1,24 +1,32 @@
 window.rego = (function() {
   return {
-    block: function(initialState, initialProps, children) {
+    block: function(initialState, initialProps, DOMLogic) {
+
       let state = initialState
       let props = initialProps
 
-      return {
-        setState: function(oldState, newState) {
-          state = object.assign({}, oldState, newState)
+      const blockMethods = {
+        setState: function(newState) {
+          state = Object.assign({}, state, newState)
           this.render()
         },
 
-        setProps: function(oldProps, newProps) {
-          props = object.assign({}, oldProps, newProps)
-          this.render()
+        mount: function() {
+          DOMLogic.mount.call(this, state, props)
+        },
+
+        unmount: function() {
+          DOMLogic.unmount()
         },
 
         render: function() {
+          DOMLogic.render.call(this, state, props)
         }
       }
 
+      blockMethods.mount()
+
+      return blockMethods
     }
   }
 })()
