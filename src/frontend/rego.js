@@ -8,12 +8,12 @@ window.rego = (function() {
         setState: function(oldState, newState) {
           state = object.assign({}, oldState, newState)
           this.render()
-        }
+        },
 
         setProps: function(oldProps, newProps) {
           props = object.assign({}, oldProps, newProps)
           this.render()
-        }
+        },
 
         render: function() {
         }

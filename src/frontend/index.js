@@ -1,2 +1,1 @@
-import './styles'
-console.log('hello world')
+import './rego.js'
