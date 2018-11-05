@@ -1,6 +1,8 @@
 window.rego = (function() {
   return {
     block: function(initialState, initialProps, DOMLogic) {
+      // TODO: add nested block capability and logic
+      // TODO: work out props logic
 
       let state = initialState
       let props = initialProps
