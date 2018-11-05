@@ -3,11 +3,12 @@ window.rego = (function() {
     block: function(initialState, initialProps, DOMLogic) {
       // TODO: add nested block capability and logic
       // TODO: work out props logic
+      // TODO: add meaningful and descriptive comments
 
-      let state = initialState
-      let props = initialProps
+      var state = initialState
+      var props = initialProps
 
-      const blockMethods = {
+      var blockMethods = {
         setState: function(newState) {
           state = Object.assign({}, state, newState)
           this.render()
