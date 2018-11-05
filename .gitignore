@@ -1,0 +1,4 @@
+node_modules/
+src/backend/public/js/
+src/backend/public/images/
+exports.sh

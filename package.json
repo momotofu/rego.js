@@ -1,0 +1,46 @@
+{
+  "name": "node-webpack-boilerplate",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "dev": "source exports.sh; concurrently --kill-others \"webpack-dev-server --mode=development --progress --colors --port 2992\" \"NODE_ENV=development nodemon ./src/backend/app.js\"",
+    "setLocalEnv": "source set_env.sh",
+    "start": "NODE_ENV=production node ./src/backend/app.js",
+    "build": "rm ./src/backend/public/js/*; webpack --mode=production",
+    "postinstall": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/momotofu/node-webpack-boilerplate"
+  },
+  "author": "Christopher Michael Reece",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "concurrently": "^4.0.1",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "nodemon": "^1.18.4",
+    "style-loader": "^0.23.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "cross-fetch": "^2.2.2",
+    "express": "^4.16.3",
+    "express-promise-router": "^3.0.3",
+    "pug": "^2.0.3"
+  }
+}
