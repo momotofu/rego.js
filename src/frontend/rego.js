@@ -20,7 +20,7 @@ window.rego = (function() {
         },
 
         unmount: function() {
-          DOMLogic.unmount()
+          DOMLogic.unmount.call(this)
         },
 
         render: function() {

@@ -25,7 +25,7 @@ const block = window.rego.block(
       this.root.append(this.button)
     },
     unmount: function(state, props) {
-      this.root.removeChild(button)
+      this.root.removeChild(this.button)
     },
     render: function(state, props) {
       this.button.textContent = state.isOn
