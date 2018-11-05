@@ -11,6 +11,10 @@ window.rego = (function() {
           this.render()
         },
 
+        getState: function() {
+          return state
+        },
+
         mount: function() {
           DOMLogic.mount.call(this, state, props)
         },
