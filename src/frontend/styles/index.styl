@@ -4,3 +4,28 @@
  * which is located in the component's enclosing folder.
  */
 @import './reset.styl'
+
+.Button
+  background gray
+  display flex
+  width 120px
+  height 60px
+  padding 12px
+  position relative
+  border-radius 40px
+  margin 12px
+
+  &-switch
+    transition all .3s ease
+    background aqua
+    border 3px solid yellow
+    height 48px
+    width 48px
+    right 64px
+    top 50%
+    transform translateY(-50%)
+    position absolute
+    border-radius 40px
+
+    &-on
+      right 7px

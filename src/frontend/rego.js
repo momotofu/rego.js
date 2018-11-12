@@ -1,18 +1,34 @@
 window.rego = (function() {
   return {
-    block: function(initialState, initialProps, DOMLogic) {
+    block: function(initialState, initialProps, rootElement, DOMLogic) {
       // TODO: add nested block capability and logic
       // TODO: work out props logic
       // TODO: add meaningful and descriptive comments
 
-      var isMounted = false;
-      var state = initialState;
-      var props = initialProps;
+      let isMounted = false;
+      let state = initialState;
+      let props = initialProps;
 
-      var blockMethods = {
+      const blockMethods = {
+        root: rootElement,
+        clone: function(initialState, initialProps, root) {
+          const block = (function() {
+            let isMounted = false;
+            //let state = initialState;
+            let props = initialProps;
+
+            return Object.create({}, this,
+              rootElement ? root : null)
+          }).call(this)
+          debugger
+
+          block.mount(state, props)
+          block.render(state, props)
+          return block
+        },
         setState: function(newState) {
           state = Object.assign({}, state, newState);
-          this.render();
+          this.render(state, props);
         },
 
         getState: function() {
@@ -34,7 +50,8 @@ window.rego = (function() {
         }
       }
 
-      blockMethods.mount()
+      blockMethods.mount(state, props)
+      blockMethods.render(state, props)
 
       return blockMethods
     }
