@@ -34,7 +34,6 @@ const buttonSwitch = window.rego.block(
       this.root.removeChild(this.button)
     },
     render: function(state, props) {
-      console.log('state: ', state)
       const isOn = state.isOn
 
       if (isOn)

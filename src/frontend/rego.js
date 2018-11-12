@@ -39,7 +39,6 @@ window.rego = (function() {
         },
 
         render: function() {
-          console.log('this: ', this)
           DOMLogic.render.call(this, this.state, this.props);
         }
       }
