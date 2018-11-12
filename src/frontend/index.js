@@ -8,7 +8,7 @@ const initialBlockState = {
 const initialProps = {
   clickHandler: function() {
     this.setState({
-      isOn: !this.getState().isOn
+      isOn: !this.state.isOn
     })
   }
 }
@@ -45,3 +45,4 @@ const buttonSwitch = window.rego.block(
 })
 
 const buttonSwitch2 = buttonSwitch.clone({ isOn: true }, initialProps, document.querySelector('#root'))
+const buttonSwitch3 = buttonSwitch.clone({ isOn: false }, initialProps, document.querySelector('#root'))

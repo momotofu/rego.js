@@ -5,39 +5,32 @@ window.rego = (function() {
       // TODO: work out props logic
       // TODO: add meaningful and descriptive comments
 
-      let isMounted = false;
-      let state = initialState;
-      let props = initialProps;
 
       const blockMethods = {
+        isMounted: false,
+        state: initialState,
+        props: initialProps,
         root: rootElement,
         clone: function(initialState, initialProps, root) {
           const block = (function() {
-            let isMounted = false;
-            //let state = initialState;
-            let props = initialProps;
-
-            return Object.create({}, this,
+            return Object.assign({}, this,
+              initialState ? { state: initialState } : null,
+              initialProps ? { props: initialProps } : null,
               rootElement ? root : null)
           }).call(this)
-          debugger
 
-          block.mount(state, props)
-          block.render(state, props)
+          block.mount(initialState, initialProps)
+          block.render(initialState, initialProps)
           return block
         },
         setState: function(newState) {
-          state = Object.assign({}, state, newState);
-          this.render(state, props);
-        },
-
-        getState: function() {
-          return state;
+          this.state = Object.assign({}, this.state, newState);
+          this.render.call(this, this.state, this.props);
         },
 
         mount: function() {
           isMounted = true;
-          DOMLogic.mount.call(this, state, props);
+          DOMLogic.mount.call(this, this.state, this.props);
         },
 
         unmount: function() {
@@ -46,12 +39,13 @@ window.rego = (function() {
         },
 
         render: function() {
-          DOMLogic.render.call(this, state, props);
+          console.log('this: ', this)
+          DOMLogic.render.call(this, this.state, this.props);
         }
       }
 
-      blockMethods.mount(state, props)
-      blockMethods.render(state, props)
+      blockMethods.mount(this.state, this.props)
+      blockMethods.render(this.state, this.props)
 
       return blockMethods
     }
