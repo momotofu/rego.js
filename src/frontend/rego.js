@@ -1,8 +1,7 @@
 window.rego = (function() {
   return {
-    block: function(initialState, initialProps, rootElement, DOMLogic) {
+    block: function(initialState, initialProps, rootElement, DOMLogic, children = []) {
       // TODO: add nested block capability and logic
-      // TODO: work out props logic
       // TODO: add meaningful and descriptive comments
 
       const blockMethods = {
@@ -10,17 +9,26 @@ window.rego = (function() {
         state: initialState,
         props: initialProps,
         root: rootElement,
+        children: children,
         clone: function(initialState, initialProps, root) {
           const block = (function() {
+            const state = this.state
+            const props = this.props
+
             return Object.assign({}, this,
-              initialState ? { state: initialState } : null,
-              initialProps ? { props: initialProps } : null,
-              rootElement ? root : null)
+              initialState ? { state: initialState } : { state },
+              initialProps ? { props: initialProps } : { props },
+              { root })
           }).call(this)
 
           block.mount(initialState, initialProps)
           block.render(initialState, initialProps)
           return block
+        },
+        addChild: function(child) {
+          this.children.push(child)
+        },
+        removeChild: function(child) {
         },
         setState: function(newState) {
           this.state = Object.assign({}, this.state, newState);
@@ -42,6 +50,10 @@ window.rego = (function() {
 
         render: function() {
           DOMLogic.render.call(this, this.state, this.props);
+          this.children.forEach((child) => {
+            child(this.state, this.props)
+            console.log('called', this)
+          }, this)
         }
       }
 
