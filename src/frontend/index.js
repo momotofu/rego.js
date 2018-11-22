@@ -2,20 +2,40 @@ import './rego.js'
 import './styles'
 
 const rego = window.rego
-const initialBlockState = {
-  isOn: false
-}
-const initialProps = {
-  clickHandler: function() {
-    this.setState({
-      isOn: !this.state.isOn
-    })
-  }
-}
 
-const buttonSwitch = window.rego.block(
-  initialBlockState,
-  initialProps,
+const square = rego.block(
+  {},
+  { color: 'green' },
+  document.querySelector('#root'),
+  {
+    mount: function(state, props) {
+      this.container = document.createElement('div')
+      this.container.setAttribute('style', `background: ${props.color}`)
+      this.container.classList.add('Square')
+      this.root.append(this.container)
+    },
+    unmount: function(state, props) {
+      this.root.remove(this.container)
+    },
+    render: function(state, props) {
+      this.container.setAttribute('style', `background: ${props.color}`)
+    }
+  }
+)
+
+const buttonSwitch = rego.block(
+  { isOn: false },
+  {
+    clickHandler: function() {
+      this.setState({
+        isOn: !this.state.isOn
+      })
+      if (this.state.isOn)
+        square.setProps({ color: 'red' })
+      else
+        square.setProps({ color: 'green' })
+    }
+  },
   document.querySelector('#root'),
   {
     mount: function(state, props) {
@@ -43,5 +63,22 @@ const buttonSwitch = window.rego.block(
     }
 })
 
-const buttonSwitch2 = buttonSwitch.clone({ isOn: true }, initialProps, document.querySelector('#root'))
-const buttonSwitch3 = buttonSwitch.clone({ isOn: false }, initialProps, document.querySelector('#root'))
+const buttonSwitch2 = buttonSwitch.clone(
+  { isOn: true }, {
+    clickHandler: function() {
+      this.setState({
+        isOn: !this.state.isOn
+      })
+    }
+  },
+  document.querySelector('#root'))
+
+const buttonSwitch3 = buttonSwitch.clone(
+  { isOn: false }, {
+    clickHandler: function() {
+      this.setState({
+        isOn: !this.state.isOn
+      })
+    }
+  },
+  document.querySelector('#root'))

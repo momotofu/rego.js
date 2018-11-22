@@ -5,7 +5,6 @@ window.rego = (function() {
       // TODO: work out props logic
       // TODO: add meaningful and descriptive comments
 
-
       const blockMethods = {
         isMounted: false,
         state: initialState,
@@ -27,7 +26,10 @@ window.rego = (function() {
           this.state = Object.assign({}, this.state, newState);
           this.render.call(this, this.state, this.props);
         },
-
+        setProps: function(newProps) {
+          this.props = Object.assign({}, this.props, newProps);
+          this.render.call(this, this.state, this.props)
+        },
         mount: function() {
           isMounted = true;
           DOMLogic.mount.call(this, this.state, this.props);
