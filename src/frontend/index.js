@@ -5,12 +5,19 @@ const rego = window.rego
 
 const square = rego.block(
   {},
-  { color: 'green' },
+  {
+    red: 0,
+    green: 0,
+    blue: 0
+  },
   document.querySelector('#root'),
   {
     mount: function(state, props) {
       this.container = document.createElement('div')
-      this.container.setAttribute('style', `background: ${props.color}`)
+      this.container.setAttribute(
+        'style',
+        `background: rgb(${props.red}, ${props.green}, ${props.blue})`
+      )
       this.container.classList.add('Square')
       this.root.append(this.container)
     },
@@ -18,7 +25,10 @@ const square = rego.block(
       this.root.remove(this.container)
     },
     render: function(state, props) {
-      this.container.setAttribute('style', `background: ${props.color}`)
+      this.container.setAttribute(
+        'style',
+        `background: rgb(${props.red}, ${props.green}, ${props.blue})`
+      )
     }
   }
 )
@@ -31,9 +41,9 @@ const buttonSwitch = rego.block(
         isOn: !this.state.isOn
       })
       if (this.state.isOn)
-        square.setProps({ color: 'red' })
+        square.setProps({ red: 255 })
       else
-        square.setProps({ color: 'green' })
+        square.setProps({ red: 0 })
     }
   },
   document.querySelector('#root'),
@@ -69,6 +79,10 @@ const buttonSwitch2 = buttonSwitch.clone(
       this.setState({
         isOn: !this.state.isOn
       })
+      if (this.state.isOn)
+        square.setProps({ green: 255 })
+      else
+        square.setProps({ green: 0 })
     }
   },
   document.querySelector('#root'))
@@ -79,6 +93,10 @@ const buttonSwitch3 = buttonSwitch.clone(
       this.setState({
         isOn: !this.state.isOn
       })
+      if (this.state.isOn)
+        square.setProps({ blue: 255 })
+      else
+        square.setProps({ blue: 0 })
     }
   },
   document.querySelector('#root'))
