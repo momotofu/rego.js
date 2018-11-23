@@ -88,14 +88,14 @@ square.addChild(function(state, props) {
   })
 })
 
-//const circle2 = circle.clone(null, null, document.querySelector('#circle'))
-//circle.addChild(function(state, props) {
-  //circle2.setProps({
-    //red: props.green,
-    //green: props.blue,
-    //blue: props.red
-  //})
-//})
+const circle2 = circle.clone(null, null, document.querySelector('#circle'))
+circle.addChild(function(state, props) {
+  circle2.setProps({
+    red: props.green,
+    green: props.blue,
+    blue: props.red
+  })
+})
 
 const buttonSwitch = rego.block(
   { isOn: false },
